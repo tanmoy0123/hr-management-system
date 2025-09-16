@@ -1,0 +1,62 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background image for login and register pages */
+.image-container,
+.image-container-signin{
+    width: 68%;
+    height: 100vh; /* Ensure this is set */
+    background-image: url('/images/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Box styling */
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: #f8fff9;
+    color: #24682d;
+    font-weight: bold;
+    font-size: 1.7rem;
+    border-radius: 6px;
+    transition: all 0.3s;
+    padding: 2.5rem;
+    box-shadow: rgba(0, 0, 0, 0.19) -1px 2px 6px 1px;
+}
+
+/* Style for span inside the button */
+.box span {
+    font-size: 1rem;
+    color: #000;
+    font-weight: 200;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* Hover effect */
+.box:hover {
+    border: 1px solid #24682d;
+}
+
+/* Rounded input fields */
+.rounded-input {
+    border-radius: 6px 0 0 6px;
+}
+
+/* Hover effects */
+.hover-bg-dark:hover {
+    background-color: #343A40;
+}
+
+.hover-text-white:hover {
+    color: white;
+}

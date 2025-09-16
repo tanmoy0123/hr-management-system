@@ -1,0 +1,122 @@
+.boxs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.boxs .box_1 {
+    height: 135px;
+    width: 250px;
+    border-radius: 4%;
+    border: 3px solid whitesmoke;
+    background: white;
+    padding: 15px;
+}
+
+.boxs .box_1 .title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    color: #c254ef;
+}
+
+.boxs .box_1 .title .details {
+    display: flex;
+    gap: 10px;
+}
+
+.boxs .box_1 .title .details i{
+
+}
+
+.boxs .box_1 .title .details .title_1{
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+}
+
+.boxs .box_1 .totalEmployee {
+    text-align: left;
+    color: black;
+}
+
+.boxs .box_1 .count {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -10px;
+}
+.boxs .box_1 .count .count_text{
+    height: 20px;
+    width: 40px;
+    background: #78ef78;
+    border: 1px solid #1ba61b;
+    border-radius: 16%;
+    display: flex;
+    justify-content: center;
+}
+
+.boxs .box_1 .count .count_text .number{
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+    margin-top: 4px;
+
+}
+
+.table_box{
+    height: 400px;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.table_box .titleUp {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table_box .titleUp h1{
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+}
+
+.table_box .titleUp i{
+    font-size: 20px;
+    color: #c254ef;
+    font-weight: bold;
+}
+
+.actionIcon i{
+    font-size: 20px;
+    color: #c254ef;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.actionIcon i:nth-child(1){
+    color: red;
+
+}
+
+.actionIcon i:nth-child(2){
+    color: black;
+    margin-top: 2px;
+}
+
+.btn-group{
+    display: none;
+}
+
+
+#datatable-buttons_length{
+    position: relative;
+}
+#datatable-buttons_filter{
+    position: absolute;
+    top: 0;
+    right: 13px;
+}

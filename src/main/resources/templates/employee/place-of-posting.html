@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Manage Place of Posting</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="main_container">
+        <div class="col-md-12">
+            <div class="right_col" role="main">
+                <div class="col-12">
+                    <div class="x_panel">
+
+                        <div class="x_title ">
+                            <div class="d-flex align-items-center justify-content-between px-0">
+                                <div>
+                                    <h2><b>Place of Posting</b></h2>
+                                </div>
+
+                                <div>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                       data-toggle="modal" data-target="#addPlacePosting" pointer>Add Place of
+                                        Posting</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box table-responsive">
+
+
+                                        <table id="datatable-buttons"
+                                               class="table table-striped table-bordered display"
+                                               style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Employee Name</th>
+                                                <th class="text-center">Wing Name</th>
+                                                <th class="text-center">Division Name</th>
+                                                <th class="text-center">Zone Name</th>
+                                                <th class="text-center">Branch Name</th>
+                                                <th class="text-center">Designation</th>
+                                                <th class="text-center">Location</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="placeofPosting, iterStat : ${placeofPostings}">
+                                                <td th:text="${placeofPosting.id}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.employeeName}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.wingName}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.divisionName}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.zoneName}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.branchName}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.designation}" class="text-center"></td>
+                                                <td th:text="${placeofPosting.placeofPostingLocation}"
+                                                    class="text-center"></td>
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1"
+                                                           data-toggle="modal"
+                                                           th:data-target="'#updatePlacePosting'+${iterStat.index}"
+                                                           type="button"
+                                                           >
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a class="text-danger mx-2" th:href="@{/place-of-posting/delete/{id}(id=${placeofPosting.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this Zone-Branch mapping?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+<!--                                                        <a type="button" >-->
+<!--                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>-->
+<!--                                                        </a>-->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Add Place of Posting Modal-->
+                        <div class="modal fade"
+                             id="addPlacePosting" tabindex="-1" role="dialog"
+                             aria-labelledby="addPlacePostingModal" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="addPlacePostingModal">Add Place
+                                            of Posting</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/place-of-posting/save}" th:object="${employee}"
+                                              method="post"
+                                              class="mb-3">
+
+                                            <div class="d-flex flex-column">
+                                                <div class="d-flex flex-row">
+                                                    <!--Employee ID-->
+                                                    <div class="form-group col-md-4">
+                                                        <label
+                                                                for="employee_id">Enter Employee
+                                                            Id</label>
+                                                        <div class="flex-row d-flex">
+                                                            <input type="number"
+                                                                   th:field="${employee.employeeId}"
+                                                                   class="form-control"
+                                                                   id="employee_id"
+                                                                   placeholder="Enter id"
+                                                                   required
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <a style="" type="submit"
+                                                       class="btn btn-outline-success btn-sm text-black-50 ml-2 h-50  mt-4 text-center"
+                                                       onclick="fetchEmployee()" pointer>Filter</a>
+
+
+                                                    <div class="d-flex flex-row mt-4" >
+                                                        <!--Wing Division Checkbox-->
+                                                        <div class="form-group form-check">
+                                                            <input type="radio" class="form-check-input h-50 w-50"
+                                                                   id="wingDivision" onclick="getWingDivision(this.id)"
+                                                                   >
+                                                            <label class="form-check-label h6 ml-5 mt-1"
+                                                                   for="wingDivision">Wing
+                                                                wise Division</label>
+                                                        </div>
+
+                                                        <!--Zone Branch Checkbox-->
+                                                        <div class="form-group form-check ">
+                                                            <input type="radio" class="form-check-input h-50 w-50"
+                                                                   id="zoneBranch" onclick="getZoneBranch(this.id)"
+                                                                   >
+                                                            <label class="form-check-label h6 ml-5 mt-1"
+                                                                   for="zoneBranch">Zone
+                                                                wise Branch</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="row placeOfPostingRow"
+                                                     data-th-each="placeofPosting, iterStat : ${employee.placeofPostingList}">
+                                                    <!--Employee Name-->
+                                                    <div class="form-group col-md-4">
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_employeeName'">Employee Name</label>
+
+                                                        <input type="text"
+                                                               th:field="*{placeofPostingList[__${iterStat.index}__].employeeName}"
+                                                               class="form-control"
+                                                               th:id="'placeofPosting_'+${iterStat.index}+'_employeeName'"
+                                                               placeholder="Enter Employee name"
+                                                               required
+
+                                                        />
+                                                    </div>
+
+                                                    <!--Employee Designation-->
+                                                    <div class="form-group col-md-4" >
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_designation'">Designation
+                                                        </label>
+
+                                                        <input type="text"
+                                                               th:id="'placeofPosting_'+${iterStat.index}+'_designation'"
+                                                               th:field="*{placeofPostingList[__${iterStat.index}__].designation}"
+                                                               class="form-control" placeholder="Enter designation"
+                                                               required>
+                                                    </div>
+
+                                                    <!--Employee Wing Name-->
+                                                    <div class="form-group col-md-4 d-none" id="wingName">
+                                                        <label th:for="'placeofPosting_'+${iterStat.index}+'_wingName'">Wing
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_wingName'"
+                                                                th:field="*{placeofPostingList[__${iterStat.index}__].wingName}"
+                                                                class="form-control" onchange="setDivision(this.id)"
+                                                                >
+                                                            <option value="" selected>Select Wing</option>
+                                                            <option th:each="wing : ${wings}"
+                                                                    th:value="${wing.wingName}"
+                                                                    th:text="${wing.wingName}"></option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <!--Employee Division Name-->
+                                                    <div class="form-group col-md-4 d-none" id="divisionName">
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_divisionName'">Division
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_divisionName'"
+                                                                th:field="*{placeofPostingList[__${iterStat.index}__].divisionName}"
+                                                                class="form-control"
+                                                                >
+                                                            <option value="" selected>Select Division</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <!--Employee Zone Name-->
+                                                    <div class="form-group col-md-4 d-none" id="zoneName">
+                                                        <label th:for="'placeofPosting_'+${iterStat.index}+'_zoneName'">Zone
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_zoneName'"
+                                                                th:field="*{placeofPostingList[__${iterStat.index}__].zoneName}"
+                                                                class="form-control" onchange="setBranches(this.id)"
+                                                                >
+                                                            <option value="" selected>Select Zone</option>
+                                                            <option th:each="zone : ${zones}"
+                                                                    th:value="${zone.zoneName}"
+                                                                    th:text="${zone.zoneName}"></option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!--Employee Branch Name-->
+                                                    <div class="form-group col-md-4 d-none" id="branchName">
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_branchName'">Branch
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_branchName'"
+                                                                th:field="*{placeofPostingList[__${iterStat.index}__].branchName}"
+                                                                class="form-control"
+                                                                >
+                                                            <option value="" selected>Select Branch</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <!--Employee Place of Posting location-->
+                                                    <div class="form-group col-md-4" >
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_placeofPostingLocation'">Location</label>
+                                                        <textarea class="form-control"
+                                                                  th:id="'placeofPosting_'+${iterStat.index}+'_placeofPostingLocation'"
+                                                                  th:field="*{placeofPostingList[__${iterStat.index}__].placeofPostingLocation}"
+                                                                  rows="2"
+                                                                  required
+                                                                  placeholder="Enter place of Posting Location"></textarea>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary placeofPostingSubmit"
+                                                        disabled>Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Update Place of Posting Modal-->
+                        <div class="modal fade" th:each="placeofPosting, iterStat : ${placeofPostings}"
+                             th:id="'updatePlacePosting'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="updatePlacePostingModal" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="updatePlacePostingModal">Update Place
+                                            of Posting</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/place-of-posting/update/{id}(id= ${placeofPosting.id})}"
+                                              method="post"
+                                              th:object="${placeofPosting}"
+                                              class="mb-3">
+
+
+
+
+
+                                                <div class="row placeOfPostingRow">
+                                                    <!--Employee Name-->
+                                                    <div class="form-group col-md-4">
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_updateEmployeeName'">Employee Name</label>
+
+                                                        <input type="text"
+                                                               th:value="${placeofPosting.employeeName}"
+                                                               name="employeeName"
+                                                               class="form-control"
+                                                               th:id="'placeofPosting_'+${iterStat.index}+'_updateEmployeeName'"
+                                                               placeholder="Enter Employee name"
+                                                               required
+
+                                                        />
+                                                    </div>
+
+
+                                                    <!--Employee Wing Name-->
+                                                    <div class="form-group col-md-4">
+                                                        <label th:for="'placeofPosting_'+${iterStat.index}+'_updateWingName'">Wing
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_updateWingName'"
+                                                                th:value="${placeofPosting.wingName}"
+                                                                name="wingName"
+                                                                class="form-control" onchange="setDivision(this.id)"
+                                                        >
+                                                            <option value="" >Select Wing</option>
+                                                            <option th:each="wing : ${wings}"
+                                                                    th:value="${wing.wingName}"
+                                                                    th:text="${wing.wingName}"
+                                                                    th:selected="${placeofPosting.wingName == wing.wingName}"></option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <!--Employee Division Name-->
+                                                    <div class="form-group col-md-4">
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_updateDivisionName'">Division
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_updateDivisionName'"
+                                                                th:value="${placeofPosting.divisionName}"
+                                                                name="divisionName"
+                                                                class="form-control"
+                                                        >
+                                                            <option th:value="${placeofPosting.divisionName}"
+                                                                    th:text="${placeofPosting.divisionName}"
+                                                                    selected></option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <!--Employee Zone Name-->
+                                                    <div class="form-group col-md-4">
+                                                        <label th:for="'placeofPosting_'+${iterStat.index}+'_updateZoneName'">Zone
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_updateZoneName'"
+                                                                th:value="${placeofPosting.zoneName}"
+                                                                name="zoneName"
+                                                                class="form-control" onchange="setBranches(this.id)"
+                                                        >
+                                                            <option value="" >Select Zone</option>
+                                                            <option th:each="zone : ${zones}"
+                                                                    th:value="${zone.zoneName}"
+                                                                    th:text="${zone.zoneName}"
+                                                                    th:selected="${placeofPosting.zoneName == zone.zoneName}"
+                                                            ></option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!--Employee Branch Name-->
+                                                    <div class="form-group col-md-4">
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_updateBranchName'">Branch
+                                                            Name
+                                                        </label>
+                                                        <select
+                                                                th:id="'placeofPosting_'+${iterStat.index}+'_updateBranchName'"
+                                                                th:value="${placeofPosting.branchName}"
+                                                                name="branchName"
+                                                                class="form-control"
+                                                        >
+                                                            <option th:value="${placeofPosting.branchName}"
+                                                                    th:text="${placeofPosting.branchName}"
+                                                                    selected></option>
+                                                        </select>
+                                                    </div>
+
+
+
+
+                                                    <!--Employee Place of Posting location-->
+                                                    <div class="form-group col-md-5" >
+                                                        <label
+                                                                th:for="'placeofPosting_'+${iterStat.index}+'_updatePlaceofPostingLocation'">Location Place of Posting
+                                                        </label>
+                                                        <textarea class="form-control"
+                                                                  th:id="'placeofPosting_'+${iterStat.index}+'_updatePlaceofPostingLocation'"
+                                                                  th:value="${placeofPosting.placeofPostingLocation}"
+                                                                  name="placeofPostingLocation"
+                                                                  rows="2"
+                                                                  th:text="${placeofPosting.placeofPostingLocation}"
+                                                                  required
+                                                                  placeholder="Enter place of Posting Location"></textarea>
+                                                    </div>
+
+
+                                                </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script>
+        function fetchEmployee(){
+            const employeeId = document.getElementById('employee_id');
+            const button = document.querySelector('.placeofPostingSubmit');
+            const employeeName = document.querySelector('#placeofPosting_0_employeeName');
+            const designation = document.getElementById('placeofPosting_0_designation');
+
+
+            if (employeeName.value !== ''){
+                employeeName.value = '';
+                return;
+            }
+
+            fetch(`http://localhost:8086/employee/find/${employeeId.value}`)
+                .then(response => response.json())
+                .then((data) => {
+                    console.table(data);
+                    employeeName.value = `${data.firstName} ${data.lastName}`;
+                    designation.value = `${data.designation}`;
+                    button.removeAttribute("disabled");
+                }).catch(() => {
+                    button.setAttribute("disabled", "true");
+                    alert(`Employee not found with this id ${employeeId.value}`);
+            });
+
+
+
+
+        }
+
+        function getWingDivision(id){
+            const selectId = document.getElementById(id);
+            const wing = document.getElementById('wingName');
+            const division = document.getElementById('divisionName');
+            const wingSelect = wing.querySelector('select');
+            const divisionSelect = division.querySelector('select');
+            const zoneBranch = document.getElementById('zoneBranch');
+            const zone = document.getElementById('zoneName');
+            const branch = document.getElementById('branchName');
+            const zoneSelect = zone.querySelector('select');
+            const branchSelect = branch.querySelector('select');
+
+            if (zoneBranch.checked){
+                zoneBranch.checked = !zoneBranch.checked;
+                zone.classList.add('d-none');
+                branch.classList.add('d-none');
+                zoneSelect.removeAttribute("required");
+                branchSelect.removeAttribute("required");
+                selectId.removeAttribute('checked');
+            }
+
+            if (selectId.checked) {
+                wing.classList.remove('d-none');
+                division.classList.remove('d-none');
+                wingSelect.setAttribute("required", "true");
+                divisionSelect.setAttribute("required", "true");
+                selectId.setAttribute("checked", "true");
+            } else {
+                wing.classList.add('d-none');
+                division.classList.add('d-none');
+                wingSelect.removeAttribute("required");
+                divisionSelect.removeAttribute("required");
+                selectId.removeAttribute('checked');
+            }
+        }
+
+
+        function getZoneBranch(id){
+            const selectId = document.getElementById(id);
+            const zone = document.getElementById('zoneName');
+            const branch = document.getElementById('branchName');
+            const zoneSelect = zone.querySelector('select');
+            const branchSelect = branch.querySelector('select');
+            const wingDivision = document.getElementById('wingDivision');
+            const wing = document.getElementById('wingName');
+            const division = document.getElementById('divisionName');
+            const wingSelect = wing.querySelector('select');
+            const divisionSelect = division.querySelector('select');
+
+            if (wingDivision.checked){
+                wingDivision.checked = !wingDivision.checked;
+                wing.classList.add('d-none');
+                division.classList.add('d-none');
+                wingSelect.removeAttribute("required");
+                divisionSelect.removeAttribute("required");
+                selectId.removeAttribute('checked');
+            }
+
+            if (selectId.checked) {
+                zone.classList.remove('d-none');
+                branch.classList.remove('d-none');
+
+                zoneSelect.setAttribute("required", "true");
+                branchSelect.setAttribute("required", "true");
+                selectId.setAttribute("checked", "true");
+            } else {
+                zone.classList.add('d-none');
+                branch.classList.add('d-none');
+                zoneSelect.removeAttribute("required");
+                branchSelect.removeAttribute("required");
+                selectId.removeAttribute('checked');
+            }
+        }
+
+        function setDivision(id){
+            let index = Number(id.match(/\d+/));
+            let divisionId = 'placeofPosting_0_divisionName';
+
+
+            if (id.includes('update')){
+                divisionId = `placeofPosting_${index}_updateDivisionName`;
+            }
+
+            const wingName = document.getElementById(id);
+            const divisionName = document.getElementById(divisionId);
+            const location = document.getElementById(`placeofPosting_${index}_placeofPostingLocation`)
+
+            if (location.value.trim()){
+                location.value ='';
+                location.textContent = `Enter  Location`
+            }
+
+            fetch(`http://localhost:8086/admin/findByWingName/${wingName.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    divisionName.innerHTML = '<option value=""  selected>Select Division</option>';
+
+                    if (!(data[0].wing.wingLocation)){
+                        location.value = '';
+                    } else {
+                        location.value = data[0].wing.wingLocation;
+                    }
+
+
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.division.divName;
+                        option.textContent = item.division.divName;
+                        divisionName.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Error fetching data:", error));
+
+        }
+
+        function setBranches(id){
+            let index = Number(id.match(/\d+/));
+            let branchId = 'placeofPosting_0_branchName';
+
+            if (id.includes('update')){
+                branchId = `placeofPosting_${index}_updateBranchName`;
+            }
+
+            const zoneName = document.getElementById(id);
+            const branchName = document.getElementById(branchId);
+            const location = document.getElementById(`placeofPosting_${index}_placeofPostingLocation`)
+
+            if (location.value.trim()){
+                location.value ='';
+                location.textContent = `Enter  Location`;
+            }
+
+            fetch(`http://localhost:8086/admin/findByZoneName/${zoneName.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    branchName.innerHTML = '<option value=""  selected>Select Branch</option>';
+
+                    if (!(data[0].zone.zoneLocation)){
+                        location.value = '';
+                    } else {
+                        location.value = data[0].zone.zoneLocation;
+                    }
+
+
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.branch.branchName;
+                        option.textContent = item.branch.branchName;
+                        branchName.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        }
+    </script>
+</th:block>
+</body>
+</html>

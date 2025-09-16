@@ -1,0 +1,199 @@
+.img-circle.profile_img {
+	width: 17%;
+	background: #fff;
+	margin-left: -7%;
+	z-index: 1000;
+	position: inherit;
+	margin-top: 0px;
+	border: 2px solid rgba(52, 73, 94, 0.44);
+	padding: 0px;
+}
+
+.navbar {
+	margin-bottom: -17px;
+}
+
+/*code to fixed the topnavbar*/
+
+/*.top_nav{*/
+/*    position: fixed;*/
+/*    z-index: 1000;*/
+/*    width: 84%;*/
+/*}*/
+/*.site_title {*/
+/*    text-overflow: ellipsis;*/
+/*    overflow: hidden;*/
+/*    font-weight: 400;*/
+/*    font-size: 24px;*/
+/*    width: 100%;*/
+/*    color: #9cbaff !important;*/
+/*    margin-left: 0 !important;*/
+/*    line-height: 60px;*/
+/*    display: block;*/
+/*    height: 58px;*/
+/*    margin: 9px;*/
+/*    padding-left: -9px;*/
+/*}*/
+
+.nav-md .container.body .right_col {
+	padding-top: 32px;
+	padding-right: -7.5px;
+	margin-right: 0px;
+	padding: 28px -21px 0;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 108.5px;
+}
+
+.x_panel {
+	min-width: 104%;
+	border: 2px solid #428CAE; /* 01/31/2025 */
+}
+
+/*Create Employee-Family Information- Button(+) alignment*/
+.btn-group,
+.btn-group-vertical {
+	padding-top: 27px;
+}
+/*Create Education- Button(+) alignment*/
+button,
+.btn {
+	margin-bottom: 1px;
+}
+
+/*!* Full-height layout for the body *!*/
+/*html, body {*/
+/*    height: 100%;*/
+/*    margin: 0;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*!* Main container should grow to fill available space *!*/
+/*.main_container {*/
+/*    flex: 1;*/
+/*}*/
+
+/*!* Footer styles *!*/
+/*.footer {*/
+/*    text-align: center;*/
+/*    padding: 10px;*/
+/*    background-color: #f8f9fa;*/
+/*    border-top: 1px solid #ddd;*/
+/*}*/
+
+/* 01/25/2025 */
+.nav_menu {
+    background: #F0F3FA;
+}
+
+/* 01/26/2025 */
+.left_col .navbar.nav_title {
+    border: 0;
+    background: #ECEFF5;
+}
+
+/* 01/26/2025 */
+.left_col .nav_title .site_title {
+    text-align: center;
+    color: black !important;
+}
+
+/* 01/29/2025 */
+.nav.side-menu>li>a{
+    border-bottom: 1px #456e96 solid;
+}
+
+/* 01/29/2025 */
+.nav>li>a {
+    padding: 13px 15px 12px;
+}
+
+/* 01/29/2025 */
+.nav.side-menu li.side_menu_item > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 01/29/2025 */
+.nav.side-menu li.side_menu_item > a .left {
+    display: flex;
+       align-items: center;
+}
+
+/* Start:01/30/2025 */
+.fa-tachometer {
+    color: #00BE67;
+}
+
+.fa-gears {
+    color: #6AB14A;
+}
+
+.fa-edit {
+    color: #98BC1B;
+}
+
+.fa-calendar-check-o {
+    color: #BD5289;
+}
+
+.fa-money {
+    color: #D9B41F;
+}
+
+.fa-plane {
+    color: #3F8AD0;
+}
+
+.fa-line-chart {
+    color: #B975D0;
+}
+
+.fa-file {
+    color: #D43A48;
+}
+
+.side-menu > li > a.common-link:hover {
+    background: #01BD67;
+    color: #fff;
+
+}
+
+.nav.side-menu > li > a:hover, .nav.side-menu > li > a:hover .fa {
+    color: #fff;
+}
+
+.side-menu > li > a.employee-link:hover {
+    background: #98BC1B;
+
+}
+
+.side-menu > li > a.attendance-link:hover {
+    background: #BD5289;
+
+}
+
+.side-menu > li > a.payroll-link:hover {
+    background: #D9B41F;
+
+}
+
+
+
+.side-menu > li > a.leave-link:hover {
+    background: #3F8AD0;
+
+}
+
+.side-menu > li > a.perfomance-link:hover {
+    background: #B975D0;
+
+}
+
+
+.side-menu > li > a.report-link:hover {
+    background: #D43A48;
+}
+/* End:01/30/2025 */

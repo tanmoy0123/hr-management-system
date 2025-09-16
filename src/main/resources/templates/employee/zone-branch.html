@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Manage Wings & Divisions</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="main_container">
+        <div class="col-md-12">
+            <div class="right_col" role="main">
+                <div class="col-12">
+                    <div class="x_panel">
+
+                        <div class="x_title ">
+                            <div class="d-flex align-items-center justify-content-between px-0">
+                                <div>
+                                    <h2><b>Zonewise Branch</b></h2>
+                                </div>
+                                <div>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                       data-toggle="modal" data-target="#zoneList" pointer>Zone List</a>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                       data-toggle="modal" data-target="#addZone" pointer>Add Zone</a>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                       data-toggle="modal" data-target="#branchList" pointer>Branches List</a>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                       data-toggle="modal" data-target="#addBranch" pointer>Add Branch</a>
+                                </div>
+                                <div>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                       data-toggle="modal" data-target="#mapZoneToBranch" pointer>Map Zone to Branch</a>
+                                </div>
+
+                            </div>
+
+                            <div id="zoneBranchFilter" class="d-flex align-items-right justify-content-start px-1 w-25">
+                                <p class="mx-2 font-weight-bold text-md">Filter-</p>
+                                <select class="form-control mx-2 h-25" required id="getZoneName">
+                                    <option>Select Zonewise Branch</option>
+                                    <option th:each="z : ${zonesName}" th:value="${z}" th:text="${z}"></option>
+                                </select>
+                                <a style="" type="submit" class="btn btn-outline-success btn-sm text-success"
+                                   data-toggle="modal" data-target="#zoneWiseBranchFilter"
+                                   onclick="fetchZoneBranches()" pointer>Filter</a>
+                            </div>
+
+                        </div>
+
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box table-responsive">
+
+
+                                        <table id="datatable-buttons"
+                                               class="table table-striped table-bordered display"
+                                               style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Zone Name</th>
+                                                <th class="text-center">Branch Name</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="zoneBranch, iterStat : ${zoneBranches}">
+                                                <td th:text="${zoneBranch.id}" class="text-center"></td>
+                                                <td th:text="${zoneBranch.zone.zoneName}" class="text-center"></td>
+                                                <td th:text="${zoneBranch.branch.branchName}" class="text-center"></td>
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1" type="button"
+                                                           data-toggle="modal"
+                                                           th:data-target="'#updateModal'+${iterStat.index}"
+                                                           data-id="${zoneBranch.id}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a class="text-danger mx-2"
+                                                           th:href="@{/admin/deleteZoneBranch/{id}(id= ${zoneBranch.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this Zone-Branch mapping?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a type="button" data-toggle="modal"
+                                                           th:data-target="'#detailsForZoneBranches'+${iterStat.index}">
+                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Filter Zone-wise Branch Modal -->
+                        <div class="modal fade"
+                             id="zoneWiseBranchFilter" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="zoneWiseBranchFilterModal">Zone-wise Branch</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered mt-4">
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th>Zone Name</th>
+                                                <th>Branch Name</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="zoneWiseBranchTable">
+                                            <tr>
+                                                <td>a</td>
+                                                <td>b</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Zone List Modal -->
+                        <div class="modal fade"
+                             id="zoneList" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="zoneListModal">Existing Zones</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered display"
+                                               style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">Zone Name</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="zone, iterStat : ${zones}">
+                                                <td th:text="${zone.zoneName}" class="text-center"></td>
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1" type="button"
+                                                           data-toggle="modal"
+                                                           th:data-target="'#updateZone'+${iterStat.index}"><i class="fa fa-edit"></i></a>
+                                                        <a class="text-danger mx-2"
+                                                           th:href="@{/admin/deleteZoneById/{id}(id= ${zone.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this Zone?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Add Zone Modal -->
+                        <div class="modal fade"
+                             id="addZone" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="addZoneModal">Existing Zones</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/addZone}" th:object="${zone}" method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="zoneName" class="form-label">Zone Name:</label>
+                                                <input type="text" th:field="*{zoneName}" id="zoneName"
+                                                       class="form-control" required
+                                                       placeholder="Please enter your zone name.">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add Zone</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update Zone Modal -->
+                        <div class="modal fade" th:each="zone, iterStat: ${zones}"
+                             th:id="'updateZone'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="updateZoneModal" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="updateZoneModal">Existing Zones</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/updateZoneById/{id}(id=${zone.id})}"
+                                              method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="zoneName" class="form-label">Zone Name:</label>
+                                                <input type="text" th:value="${zone.zoneName}" id="updateZoneName"
+                                                       name="zoneName"
+                                                       class="form-control" required
+                                                       placeholder="Please enter your zone name.">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Zone</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Branch List Modal -->
+                        <div class="modal fade"
+                             id="branchList" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="branchListModal">Existing Branches</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered display"
+                                               style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">Branch Name</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="branch, iterStat : ${branches}">
+                                                <td th:text="${branch.branchName}" class="text-center"></td>
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1" type="button"
+                                                           data-toggle="modal"
+                                                           th:data-target="'#updateBranch'+${iterStat.index}"
+                                                        ><i class="fa fa-edit"></i></a>
+                                                        <a class="text-danger mx-2"
+                                                           th:href="@{/admin/deleteBranchById/{id}(id=${branch.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this Branch?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add Branch Modal -->
+                        <div class="modal fade"
+                             id="addBranch" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="addBranchModal">Add Branch</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/addBranch}" th:object="${branch}" method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="branchName" class="form-label">Branch Name:</label>
+                                                <input type="text" th:field="*{branchName}" id="branchName"
+                                                       class="form-control"
+                                                       placeholder="Please enter your branch name here." required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add Branch</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update Branch Modal -->
+                        <div class="modal fade" th:each="branch, iterStat: ${branches}"
+                             th:id="'updateBranch'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="updateBranchModal" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="updateBranchModal">Existing Branches</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/updateBranchById/{id}(id=${branch.id})}"
+                                              method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="updateBranchName" class="form-label">Branch Name:</label>
+                                                <input type="text" th:value="${branch.branchName}" id="updateBranchName"
+                                                       name="branchName" class="form-control" required
+                                                       placeholder="Please enter your Branch name.">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Branch</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map Zone To Branch Modal -->
+                        <div class="modal fade"
+                             id="mapZoneToBranch" tabindex="-1" role="dialog"
+                             aria-labelledby="mapZoneToBranchModal" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="mapZoneToBranchModal">Map Zone To Branch</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/mapZoneBranch}" method="post">
+                                            <div class="mb-3">
+                                                <label for="zoneId" class="form-label">Select Zone:</label>
+                                                <select id="zoneId" name="zoneId" class="form-control" required>
+                                                    <option value="" selected>Select Zone Name</option>
+                                                    <option th:each="z : ${zones}" th:value="${z.id}"
+                                                            th:text="${z.zoneName}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="branchId" class="form-label">Select Branch:</label>
+                                                <select id="branchId" name="branchId" class="form-control" required
+                                                        onchange="checkBranch(this.id)">
+                                                    <option value="" selected>Select Branch Name</option>
+
+                                                    <option th:each="b : ${branches}" th:value="${b.id}"
+                                                            th:text="${b.branchName}"></option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" id="mapZoneBranch" class="btn btn-primary">Map Zone
+                                                to
+                                                Branch</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Details Modal -->
+                        <div class="modal fade" data-th-each="zoneBranch, iterStat : ${zoneBranches}"
+                             th:id="'detailsForZoneBranches'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="detailsForZoneBranches" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="detailsForZoneBranches">Zone-Branch Information</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered display" style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">Zone</th>
+                                                <th class="text-center">Branch</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-center">
+                                                <td th:text="${zoneBranches.get(iterStat.index).zone.zoneName}"></td>
+                                                <td th:text="${zoneBranches.get(iterStat.index).branch.branchName}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update Modal -->
+                        <div class="modal fade" th:each="zoneBranch2, index : ${zoneBranches}"
+                             th:id="'updateModal'+${index.index}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Update Zone-Branch</h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/updateZoneBranch/{id}(id=${zoneBranch2.id})}"
+                                              method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="getZoneNameOfZoneBranch" class="form-label">Zone Name:</label>
+                                                <select class="form-control mx-2 h-25" required
+                                                        id="getZoneNameOfZoneBranch" name="zoneName">
+                                                    <option value="">Select Zone</option>
+                                                    <option th:each="z : ${zones}" th:value="${z.zoneName}"
+                                                            th:text="${z.zoneName}"
+                                                            th:selected="${zoneBranch2.zone.zoneName == z.zoneName}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="getBranchNameOfZoneBranch" class="form-label">Branch Name:</label>
+                                                <select class="form-control mx-2 h-25" required
+                                                        id="getBranchNameOfZoneBranch"
+                                                        name="branchName">
+                                                    <option value="">Select Branch</option>
+                                                    <option th:each="b : ${branches}" th:value="${b.branchName}"
+                                                            th:text="${b.branchName}"
+                                                            th:selected="${zoneBranch2.branch.branchName == b.branchName}"></option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Update Zone-Branch</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script>
+        console.log('Zone-Branch Page.')
+
+        //     // Function to fetch branches based on the selected zone
+            function fetchZoneBranches() {
+            let zoneName = document.getElementById("getZoneName").value;
+
+            if (!zoneName) {
+            alert("Please enter a zone name");
+            return;
+        }
+
+            // Fetching branches for the given zone from the backend
+            fetch(`http://localhost:8086/admin/findByZoneName/${zoneName}`)
+            .then(response => response.json())
+            .then(data => {
+            let tableBody = document.getElementById("zoneWiseBranchTable");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            // If no data is found, display a message
+            if (data.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='2' class='text-center'>No data found</td></tr>";
+        } else {
+            // Populate table with fetched data
+            data.forEach(item => {
+            console.log(item.zone.zoneName);
+            console.log(item.branch.branchName);
+
+            let row = `<tr>
+                            <td>${item.zone.zoneName}</td>
+                            <td>${item.branch.branchName}</td>
+                        </tr>`;
+            tableBody.innerHTML += row;
+        });
+        }
+        })
+            .catch(error => console.error("Error fetching data:", error));
+        }
+        //
+        //     // Function to fetch and display zone-branch details for update
+        //     function fetchUpdateZoneBranches(tag) {
+        //     let selectedZoneBranchId = tag.getAttribute("data-id");
+        //
+        //     // Fetching specific zone-branch details based on ID
+        //     fetch(`http://localhost:8086/admin/updateZoneBranch/${selectedZoneBranchId}`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //     let zoneName = document.getElementById("zoneNameById");
+        //     let branchName = document.getElementById("branchNameById");
+        //
+        //     // If no data found, display a message
+        //     if (data.length === 0) {
+        //     zoneName.innerText = "No data found";
+        //     branchName.innerText = "No data found";
+        // } else {
+        //     // Populate fields with fetched data
+        //     data.forEach(item => {
+        //     console.log(item.zone.zoneName);
+        //     console.log(item.branch.branchName);
+        //
+        //     zoneName.innerText = `${item.zone.zoneName}`;
+        //     branchName.innerText = `${item.branch.branchName}`;
+        // });
+        // }
+        // })
+        //     .catch(error => console.error("Error fetching data:", error));
+        // }
+        //
+        //     // Variable to store the selected Zone-Branch ID for update operations
+        //     let selectedZoneBranchId = null;
+        //
+        //     // Function to fetch zone-branch details by ID before updating
+        //     function fetchZoneBranchById(button) {
+        //     selectedZoneBranchId = button.getAttribute("data-id");
+        //
+        //     // Fetching details of the selected Zone-Branch
+        //     fetch(`http://localhost:8086/admin/updateZoneBranch/${selectedZoneBranchId}`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //     // Populate form fields with the fetched data
+        //     document.getElementById("zoneBranchId").value = data.id;
+        //     document.getElementById("zoneSelect").value = data.zoneName;
+        //     document.getElementById("branchSelect").value = data.branchName;
+        // })
+        //     .catch(error => console.error("Error fetching data:", error));
+        // }
+        //
+        //     // Function to update an existing Zone-Branch mapping
+        //     function updateZoneBranch() {
+        //     let updatedZoneName = document.getElementById("zoneSelect").value;
+        //     let updatedBranch = document.getElementById("branchSelect").value;
+        //
+        //     // Sending updated data to the backend
+        //     fetch(`http://localhost:8086/admin/updateZoneBranch/${selectedZoneBranchId}`, {
+        //     method: "POST",
+        //     headers: {
+        //     "Content-Type": "application/json"
+        // },
+        //     body: JSON.stringify({
+        //     zoneName: updatedZoneName,
+        //     branchName: updatedBranch
+        // })
+        // })
+        //     .then(response => {
+        //     if (response.ok) {
+        //     alert("ZoneBranch updated successfully!");
+        //     location.reload(); // Refresh the page to display updated data
+        // } else {
+        //     alert("Error updating ZoneBranch");
+        // }
+        // })
+        //     .catch(error => console.error("Error updating:", error));
+        // }
+
+        //24-03-2025
+
+        function checkBranch(id){
+
+            const zone = document.querySelector('#zoneId');
+            const selectedZone = zone.options[zone.selectedIndex];
+
+            const branch = document.getElementById(id);
+            const selectBranch = branch.options[branch.selectedIndex];
+
+
+            fetch(`http://localhost:8086/admin/findByZoneName/${selectedZone.innerText.trim()}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        if(item.branch.branchName === selectBranch.innerText.trim()){
+                            console.log(item.branch.branchName, selectBranch.innerText.trim())
+                            const error = `<span style="color:red;">Branch is available.</span>`;
+                            if(!(document.getElementById(id).nextElementSibling)){
+                                document.getElementById(id).insertAdjacentHTML('afterend', error);
+                            }
+                            document.getElementById('mapZoneBranch').disabled = true;
+                        } else {
+                            if(document.getElementById(id).nextElementSibling){
+                                console.log("Test Failed");
+                                console.log(item.branch.branchName, selectBranch.innerText.trim())
+
+                                document.getElementById(id).nextElementSibling.remove();
+                                document.getElementById('mapZoneBranch').disabled = false;
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        }
+
+        //24-03-2025
+
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">HRMS</title>
+
+    <!-- Bootstrap -->
+
+    <link th:href="@{cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css}">
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <!-- iCheck -->
+    <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+    <link th:href="@{/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}" rel="stylesheet"/>
+    <!-- Custom Theme Style -->
+    <link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+    <link th:href="@{/css/custom_1.css}" rel="stylesheet">
+    <link th:href="@{/css/custom3.css}" rel="stylesheet">
+
+
+<!--    Tailwind CSS-->
+
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+
+    <!-- Datatables -->
+
+    <link th:href="@{/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css}" rel="stylesheet">
+    <!-- Include jQuery UI CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.min.css">
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Datatable -->
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.min.js"></script>
+
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <!-- Left sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+        <!-- Top navigation -->
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <!-- Page content -->
+        <div class="right_col" role="main" layout:fragment="content">
+            <h1 layout:fragment="title">Page Title</h1>
+            <!-- Content will be inserted here -->
+            <div layout:fragment="content">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<!-- jQuery -->
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+
+<!-- Bootstrap -->
+
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<!-- FastClick -->
+
+
+<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+
+<!-- iCheck -->
+<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+
+
+<script th:src="@{/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{/build/js/custom.min.js}"></script>
+
+<!-- Datatables -->
+<script th:src="@{/vendors/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-buttons/js/buttons.flash.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-buttons/js/buttons.print.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js}"></script>
+<script th:src="@{/vendors/datatables.net-scroller/js/dataTables.scroller.min.js}"></script>
+<script th:src="@{/vendors/jszip/dist/jszip.min.js}"></script>
+<script th:src="@{/vendors/pdfmake/build/pdfmake.min.js}"></script>
+<script th:src="@{/vendors/pdfmake/build/vfs_fonts.js}"></script>
+<!-- jQuery Smart Wizard -->
+<script th:src="@{/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js}"></script>
+
+
+
+
+<!-- Include jQuery UI JS -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!--Page Specific JS-->
+<!--Page Specific JS-->
+<th:block layout:fragment="script"></th:block>
+
+</body>
+</html>

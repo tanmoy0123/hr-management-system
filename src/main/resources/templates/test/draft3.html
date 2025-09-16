@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!--<!DOCTYPE html>-->
+        <!--<html xmlns:th="http://www.thymeleaf.org"-->
+        <!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+        <!--      layout:decorate="~{layout}">-->
+        <!--<head>-->
+        <!--    <title>Home</title>-->
+    <!--</head>-->
+    <!--<body>-->
+    <!--<div layout:fragment="content">-->
+
+    <!--    <div class="main_container">-->
+    <!--        <div class="col-md-12">-->
+    <!--            <div class="right_col" role="main">-->
+    <!--                <div class="">-->
+    <!--                    <div class="col-12">-->
+    <!--                        <div class="x_panel">-->
+
+    <!--                            &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Content Page Header&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+    <!--                            <div class="x_title">-->
+    <!--                                <h2><b> Create Employee</b></h2>-->
+    <!--                                <div class="" style="text-align: right"><a th:href="@{/employee}" style=""-->
+    <!--                                                                           class="btn btn-outline-success btn-sm">Employee-->
+    <!--                                    Lists</a></div>-->
+    <!--                                <div class="clearfix"></div>-->
+    <!--                            </div>-->
+    <!--                            &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Content Page Header End&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+
+    <!--                            &lt;!&ndash; Step Navigation &ndash;&gt;-->
+    <!--                            <ul class="nav nav-tabs" id="wizardTab" role="tablist">-->
+
+    <!--                                <li class="nav-item">-->
+    <!--                                    <a class="nav-link active" id="step1-tab" data-toggle="tab"-->
+    <!--                                       href="#step1" role="tab" aria-controls="step1"-->
+    <!--                                       aria-selected="true">Employee Basic Information</a>-->
+    <!--                                </li>-->
+
+    <!--                                <li class="nav-item">-->
+    <!--                                    <a class="nav-link" id="step2-tab" data-toggle="tab" href="#step2"-->
+    <!--                                       role="tab" aria-controls="step2" aria-selected="false">Family Information</a>-->
+    <!--                                </li>-->
+    <!--                                <li class="nav-item">-->
+
+    <!--                                    <a class="nav-link" id="step3-tab" data-toggle="tab" href="#step3"-->
+    <!--                                       role="tab" aria-controls="step3"-->
+    <!--                                       aria-selected="false">Education</a>-->
+    <!--                                </li>-->
+    <!--                                <li class="nav-item">-->
+    <!--                                    <a class="nav-link" id="step4-tab" data-toggle="tab" href="#step4"-->
+    <!--                                       role="tab" aria-controls="step4" aria-selected="false">Medical & Police-->
+    <!--                                        Clearance</a>-->
+    <!--                                </li>-->
+    <!--                                <li class="nav-item">-->
+    <!--                                    <a class="nav-link" id="step5-tab" data-toggle="tab" href="#step5"-->
+    <!--                                       role="tab" aria-controls="step5" aria-selected="false">Previous Experience</a>-->
+    <!--                                </li>-->
+    <!--                            </ul>-->
+
+    <!--                            <form id="quickForm" >-->
+    <!--                                &lt;!&ndash; Tab Content &ndash;&gt;-->
+    <!--                                <div class="tab-content" id="wizardTabContent">-->
+
+
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Employee Basic Information Start&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+    <!--                                    &lt;!&ndash; Step 1 &ndash;&gt;-->
+    <!--                                    <div class="tab-pane fade show active" id="step1" role="tabpanel"-->
+    <!--                                         aria-labelledby="step1-tab">-->
+    <!--                                        <h6 style="text-align: center; color: #3030c9;"><b>Employee Basic Information</b></h6>-->
+
+    <!--                                        &lt;!&ndash; Employee Name Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; First Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="firstName">First Name<span class="required">*</span></label>-->
+    <!--                                                    <input type="text"  id="firstName" class="form-control"-->
+    <!--                                                           placeholder="Enter first name"required>-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Last Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="lastName">Last Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="lastName"-->
+    <!--                                                           placeholder="Enter last name"required>-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Family Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="lastName"> Family Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="familyName"-->
+    <!--                                                           placeholder="Enter last name"required>-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+
+    <!--                                        &lt;!&ndash; Parent's Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; Father's Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="fathersName">Father's Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="fathersName"-->
+    <!--                                                           placeholder="Enter father's name"required>-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Mother's Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="mothersName">Mother's Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="mothersName"-->
+    <!--                                                           placeholder="Enter mother's name"required>-->
+    <!--                                                </div>-->
+
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="dob">Date of Birth</label>-->
+    <!--                                                    <input type="date" class="form-control" id="dob"required>-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+
+    <!--                                        &lt;!&ndash;Other Informations&ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; Date of Birth Field &ndash;&gt;-->
+
+
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="religion">Religion</label>-->
+    <!--                                                    <input type="text" id="religion"  class="form-control"/>-->
+    <!--                                                </div>-->
+
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="homeDistrict">Home District</label>-->
+    <!--                                                    <input type="text" id="homeDistrict"  class="form-control"/>-->
+    <!--                                                </div>-->
+
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="upazila">Upozila</label>-->
+    <!--                                                    <input type="text" id="upazila" class="form-control"/>-->
+    <!--                                                </div>-->
+
+
+    <!--                                               &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Blood Group-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="bloodGroup">Blood Group</label>-->
+    <!--                                                    <select class="form-control" id="bloodGroup">-->
+    <!--                                                        <option value="" disabled selected>-->
+    <!--                                                            Select blood group-->
+    <!--                                                        </option>-->
+    <!--                                                        <option value="A+">A+</option>-->
+    <!--                                                        <option value="A-">A-</option>-->
+    <!--                                                        <option value="B+">B+</option>-->
+    <!--                                                        <option value="B-">B-</option>-->
+    <!--                                                        <option value="AB+">AB+</option>-->
+    <!--                                                        <option value="AB-">AB-</option>-->
+    <!--                                                        <option value="O+">O+</option>-->
+    <!--                                                        <option value="O-">O-</option>-->
+    <!--                                                    </select>-->
+    <!--                                                    <div class="invalid-feedback">-->
+    <!--                                                        Please select a blood group.-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+
+
+    <!--&lt;!&ndash;                                                Nationality&ndash;&gt;-->
+
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="nationality">Nationality</label>-->
+    <!--                                                    <input type="text" class="form-control" id="nationality"-->
+    <!--                                                           placeholder="Enter nationality"required>-->
+    <!--                                                </div>-->
+
+
+    <!--                                                &lt;!&ndash; Email Address Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="email">Email Address</label>-->
+    <!--                                                    <input type="email" class="form-control" id="email"-->
+    <!--                                                           placeholder="Enter email" required>-->
+    <!--                                                </div>-->
+
+
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="maritalStatus">Marital Status</label>-->
+    <!--                                                    <select class="form-control" id="maritalStatus" >-->
+    <!--                                                        <option value="" disabled selected>-->
+    <!--                                                            Select Marital Status-->
+    <!--                                                        </option>-->
+    <!--                                                        <option value="married">Married</option>-->
+    <!--                                                        <option value="unmarried">Unmarried</option>-->
+    <!--                                                    </select>-->
+    <!--                                                </div>-->
+
+
+
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+
+    <!--                                        &lt;!&ndash; Nationality, Email & Passport &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; National ID Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="nid">National ID (NID)</label>-->
+    <!--                                                    <input type="text" class="form-control" id="nid"-->
+    <!--                                                           placeholder="Enter NID number"required>-->
+    <!--                                                </div>-->
+
+
+
+    <!--                                                &lt;!&ndash; Phone Number Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="phoneNumberone">Phone Number</label>-->
+    <!--                                                    <div class="input-group">-->
+    <!--                                                        <div class="input-group-prepend">-->
+    <!--                                                            <span class="input-group-text">+88</span>-->
+    <!--                                                        </div>-->
+    <!--                                                        <input type="tel" class="form-control" id="phoneNumberone" placeholder="Enter phone number"required>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+
+
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+
+    <!--                                        &lt;!&ndash; Nationality, Home District & District&ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; Nationality &ndash;&gt;-->
+
+    <!--                                                &lt;!&ndash; Home District Field &ndash;&gt;-->
+
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+
+    <!--                                        &lt;!&ndash; Residential Address Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; Present Address Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="presentAddress">Present Address</label>-->
+    <!--                                                    <textarea class="form-control" id="presentAddress" rows="2"-->
+    <!--                                                              placeholder="Enter present address"required></textarea>-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Permanent Address Field &ndash;&gt;-->
+
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="permanentAddress">Permanent Address</label>-->
+    <!--                                                    <textarea class="form-control" id="permanentAddress" rows="2"-->
+    <!--                                                              placeholder="Enter permanent address" required></textarea>-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Blood Group&ndash;&gt;-->
+
+
+
+    <!--                                                &lt;!&ndash; Photo Uploading &ndash;&gt;-->
+
+    <!--&lt;!&ndash;                                                <div class="form-group">&ndash;&gt;-->
+    <!--&lt;!&ndash;                                                    <label for="photo">Upload Photo</label>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                                    <input type="file" class="form-control-file" id="photo">&ndash;&gt;-->
+    <!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+
+
+
+
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="photo">Upload Photo</label>-->
+    <!--                                                    <input-->
+    <!--                                                            type="file"-->
+    <!--                                                            id="photo"-->
+    <!--                                                            name="photo"-->
+    <!--                                                            class="form-control"-->
+    <!--                                                            accept=".jpg,.png,.jpeg, .pdf, .doc, .docx"-->
+    <!--                                                    />-->
+    <!--                                                </div>-->
+
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="nidDocument">Upload NID Documents</label>-->
+    <!--                                                    <input-->
+    <!--                                                            type="file"-->
+    <!--                                                            id="nidDocument"-->
+    <!--                                                            name="nidDocument"-->
+    <!--                                                            class="form-control"-->
+    <!--                                                            accept=".jpg,.png,.jpeg, .pdf, .doc, .docx"-->
+    <!--                                                    />-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Employee Basic Information END&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Family Information START&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+    <!--                                    &lt;!&ndash; Step 2 &ndash;&gt;-->
+    <!--                                    <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">-->
+    <!--                                        <h6 style="text-align: center; color: #3030c9;"><b>Family Information</b></h6>-->
+
+    <!--                                        &lt;!&ndash; Spouse Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row spouse-info-row" id="spouse-info-container">-->
+    <!--                                                &lt;!&ndash; Spouse First Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>Spouse First Name</label>-->
+    <!--                                                    <input type="text" class="form-control" placeholder="Enter spouse first name">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Spouse Last Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>Spouse Last Name</label>-->
+    <!--                                                    <input type="text" class="form-control" placeholder="Enter spouse last name">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Relation Field (Dropdown) &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>Relation</label>-->
+    <!--                                                    <select class="form-control">-->
+    <!--                                                        <option value="husband">Husband</option>-->
+    <!--                                                        <option value="wife">Wife</option>-->
+    <!--                                                    </select>-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Add Button Only &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>&nbsp;</label>-->
+    <!--                                                    <div class="btn-group">-->
+    <!--                                                        <button type="button" class="btn btn-success addSpouseRowButton">+</button>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+
+    <!--                                        &lt;!&ndash; Children Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <h6 style="text-align: center; color: #3030c9;"><b>Children Information</b></h6>-->
+    <!--                                            <div class="row children-info-row" id="children-info-container">-->
+    <!--                                                &lt;!&ndash; Child Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>Child Name</label>-->
+    <!--                                                    <input type="text" class="form-control" placeholder="Enter child name">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Relationship Field (Dropdown) &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>Relationship</label>-->
+    <!--                                                    <select class="form-control">-->
+    <!--                                                        <option value="son">Son</option>-->
+    <!--                                                        <option value="daughter">Daughter</option>-->
+    <!--                                                    </select>-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Date of Birth Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label>Date of Birth</label>-->
+    <!--                                                    <input type="date" class="form-control">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Add Button Only &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-2">-->
+    <!--                                                    <label>&nbsp;</label>-->
+    <!--                                                    <div class="btn-group">-->
+    <!--                                                        <button type="button" class="btn btn-success addChildRowButton">+</button>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Educational Background related Information Start&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+    <!--                                    <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">-->
+    <!--                                        <h6 style="text-align: center; color: #3030c9;"><b>Educational Background</b></h6>-->
+
+    <!--                                        &lt;!&ndash; Educational Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row education-info-row">-->
+    <!--                                                &lt;!&ndash; Name of the Examination Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="examinationName">Exams</label>-->
+    <!--                                                    <select class="form-control" id="examinationName">-->
+    <!--                                                        <option value="ssc">SSC</option>-->
+    <!--                                                        <option value="hsc">HSC</option>-->
+    <!--                                                        <option value="bachelor">Bachelor</option>-->
+    <!--                                                        <option value="masters">Masters</option>-->
+    <!--                                                    </select>-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Passing Year Field &ndash;&gt;-->
+
+
+    <!--                                                <div class="form-group col-sm-1">-->
+    <!--                                                    <label for="passingYear">Year</label>-->
+    <!--                                                    <input type="text" class="form-control" id="passingYear">-->
+    <!--                                                </div>-->
+
+
+
+
+    <!--                                                &lt;!&ndash; Class/Division Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="classDivision">Class/Div</label>-->
+    <!--                                                    <select class="form-control" id="classDivision">-->
+    <!--                                                        <option value="first">First</option>-->
+    <!--                                                        <option value="second">Second</option>-->
+    <!--                                                        <option value="third">Third</option>-->
+    <!--                                                    </select>-->
+    <!--                                                </div>-->
+
+
+
+    <!--                                                &lt;!&ndash; Board/University Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="boardUniversity">Board/Uni</label>-->
+    <!--                                                    <input type="text" class="form-control" id="boardUniversity" placeholder="Board/Uni">-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Group/Subject Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="groupSubject">Group/Subj</label>-->
+    <!--                                                    <input type="text" class="form-control" id="groupSubject" placeholder="Group/Subj">-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Upload Documents Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="uploadDocuments">Documents</label>-->
+    <!--                                                    <input type="text" class="form-control" id="uploadDocuments" placeholder="Upload">-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Add/Remove Row Buttons &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-1 d-flex align-items-end">-->
+    <!--                                                    <button type="button" class="btn btn-success addEducationRowButton">+</button>-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Educational Background related Information End&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+
+
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Medical and Police Clearance related Information Start&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+    <!--                                    &lt;!&ndash; Step 4 &ndash;&gt;-->
+
+    <!--                                    <div class="tab-pane fade" id="step4" role="tabpanel" aria-labelledby="step4-tab">-->
+    <!--                                        <h6 style="text-align: center; color: #3030c9;"><b>Medical & Police-->
+    <!--                                            Clearance</b></h6>-->
+
+    <!--                                        &lt;!&ndash; Employee Name Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            <div class="row">-->
+    <!--                                                &lt;!&ndash; First Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="firstName">First Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="firstName1"-->
+    <!--                                                           placeholder="Enter first name">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Last Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="lastName">Last Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="lastName1"-->
+    <!--                                                           placeholder="Enter last name">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Family Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-4">-->
+    <!--                                                    <label for="lastName"> Family Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="familyName1"-->
+    <!--                                                           placeholder="Enter last name">-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Medical and Police Clearance related Information End&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+    <!--                                    &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Previous Experience related Information Start-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+    <!--                                    &lt;!&ndash; Step 5 &ndash;&gt;-->
+    <!--                                    <div class="tab-pane fade" id="step5" role="tabpanel"-->
+    <!--                                         aria-labelledby="step5-tab">-->
+    <!--                                        <h6 style="text-align: center; color: #3030c9;"><b>Previous Experiences</b></h6>-->
+
+    <!--                                        &lt;!&ndash; Employee Name Information &ndash;&gt;-->
+    <!--                                        <div class="form-group col-md-12">-->
+    <!--                                            &lt;!&ndash;                                            <div class="row">&ndash;&gt;-->
+    <!--                                            <div class="row previous-info-row">-->
+    <!--                                                &lt;!&ndash; Organization Name Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="organizationName">Organization Name</label>-->
+    <!--                                                    <input type="text" class="form-control" id="organizationName"-->
+    <!--                                                           placeholder="Enter organization name">-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Designation Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-md-3">-->
+    <!--                                                    <label for="designation">Designation</label>-->
+    <!--                                                    <input type="text" class="form-control" id="designation"-->
+    <!--                                                           placeholder="Enter designation">-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; Start Date Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="startDate">Start Date</label>-->
+    <!--                                                    <input type="date" class="form-control" id="startDate">-->
+    <!--                                                </div>-->
+
+    <!--                                                &lt;!&ndash; End Date Field &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-2">-->
+    <!--                                                    <label for="endDate">End Date</label>-->
+    <!--                                                    <input type="date" class="form-control" id="endDate">-->
+    <!--                                                </div>-->
+    <!--                                                &lt;!&ndash; Add/Remove Row Buttons &ndash;&gt;-->
+    <!--                                                <div class="form-group col-sm-1 d-flex align-items-end">-->
+    <!--                                                    &lt;!&ndash;                                                    <button type="button" class="btn btn-success addEducationRowButton">+</button>&ndash;&gt;-->
+    <!--                                                    <button type="button" class="btn btn-success addPreviousExperienceRowButton">+</button>-->
+    <!--                                                </div>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                    &lt;!&ndash;                                    <button type="submit" class="btn btn-success">Submit</button>&ndash;&gt;-->
+    <!--                                    <button type='submit' class="btn btn-primary">Submit</button>-->
+    <!--                                    &lt;!&ndash;                                    <button type="button" class="btn btn-secondary prev-step">Previous</button>&ndash;&gt;-->
+
+    <!--                                </div>-->
+    <!--                            </form>-->
+
+    <!--                        </div>-->
+    <!--                    </div>-->
+
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash; Page-Specific Script &ndash;&gt;-->
+    <!--<th:block layout:fragment="script">-->
+
+    <!--    <script>-->
+
+    <!--        document.addEventListener("click", function (e) {-->
+    <!--            // Adding a new spouse row-->
+    <!--            if (e.target && e.target.classList.contains("addSpouseRowButton")) {-->
+    <!--                const container = document.querySelector(".spouse-info-row");-->
+    <!--                const newRow = container.cloneNode(true);-->
+    <!--                newRow.querySelectorAll("input").forEach(input => input.value = "");-->
+
+    <!--                // Remove the + button and add only the - button-->
+    <!--                const buttonGroup = newRow.querySelector(".btn-group");-->
+    <!--                buttonGroup.innerHTML = '<button type="button" class="btn btn-danger removeSpouseRowButton">-</button>';-->
+
+    <!--                container.parentNode.appendChild(newRow);-->
+    <!--            }-->
+
+    <!--            // Removing a spouse row-->
+    <!--            if (e.target && e.target.classList.contains("removeSpouseRowButton")) {-->
+    <!--                const row = e.target.closest(".spouse-info-row");-->
+    <!--                if (row && row.parentNode.childElementCount > 1) {-->
+    <!--                    row.remove();-->
+    <!--                }-->
+    <!--            }-->
+
+    <!--            // Adding a new child row-->
+    <!--            if (e.target && e.target.classList.contains("addChildRowButton")) {-->
+    <!--                const container = document.querySelector(".children-info-row");-->
+    <!--                const newRow = container.cloneNode(true);-->
+    <!--                newRow.querySelectorAll("input").forEach(input => input.value = "");-->
+
+    <!--                // Remove the + button and add only the - button-->
+    <!--                const buttonGroup = newRow.querySelector(".btn-group");-->
+    <!--                buttonGroup.innerHTML = '<button type="button" class="btn btn-danger removeChildRowButton">-</button>';-->
+
+    <!--                container.parentNode.appendChild(newRow);-->
+    <!--            }-->
+
+    <!--            // Removing a child row-->
+    <!--            if (e.target && e.target.classList.contains("removeChildRowButton")) {-->
+    <!--                const row = e.target.closest(".children-info-row");-->
+    <!--                if (row && row.parentNode.childElementCount > 1) {-->
+    <!--                    row.remove();-->
+    <!--                }-->
+    <!--            }-->
+    <!--        });-->
+
+    <!--    </script>-->
+
+    <!--    <script>-->
+
+    <!--        // JavaScript to handle adding/removing educational information rows-->
+    <!--        document.addEventListener("click", function (e) {-->
+    <!--            // Add a new education row-->
+    <!--            if (e.target && e.target.classList.contains("addEducationRowButton")) {-->
+    <!--                const container = document.querySelector(".education-info-row");-->
+    <!--                const newRow = container.cloneNode(true);-->
+
+    <!--                // Clear values in the new row-->
+    <!--                newRow.querySelectorAll("input").forEach(input => input.value = "");-->
+    <!--                newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);-->
+
+    <!--                // Modify buttons in the new row-->
+    <!--                const addButton = newRow.querySelector(".addEducationRowButton");-->
+    <!--                addButton.remove(); // Remove "+" button from cloned row-->
+
+    <!--                // Create and add a "-" button to the new row-->
+    <!--                const removeButton = document.createElement("button");-->
+    <!--                removeButton.type = "button";-->
+    <!--                removeButton.classList.add("btn", "btn-danger", "removeEducationRowButton");-->
+    <!--                removeButton.textContent = "-";-->
+    <!--                newRow.querySelector(".form-group.col-sm-1.d-flex.align-items-end").appendChild(removeButton);-->
+
+    <!--                // Append the cloned row to the parent-->
+    <!--                container.parentNode.appendChild(newRow);-->
+    <!--            }-->
+
+    <!--            // Remove an education row-->
+    <!--            if (e.target && e.target.classList.contains("removeEducationRowButton")) {-->
+    <!--                const row = e.target.closest(".education-info-row");-->
+    <!--                if (row && row.parentNode.childElementCount > 1) { // Ensure at least one row remains-->
+    <!--                    row.remove();-->
+    <!--                }-->
+    <!--            }-->
+    <!--        });-->
+
+
+    <!--    </script>-->
+    <!--    &lt;!&ndash;    year selection for education&ndash;&gt;-->
+
+    <!--    <script>-->
+    <!--        $(function() {-->
+    <!--            $("#passingYear").datepicker({-->
+    <!--                changeYear: true,      // Enable year change-->
+    <!--                showButtonPanel: true, // Show button panel-->
+    <!--                dateFormat: "yy",      // Only display the year-->
+    <!--                yearRange: "1900:2099",// Specify the year range-->
+    <!--                onSelect: function(dateText) {-->
+    <!--                    console.log("Selected year:", dateText); // Optional: log selected year-->
+    <!--                },-->
+    <!--                beforeShow: function(input, inst) {-->
+    <!--                    inst.dpDiv.addClass('yearpicker'); // Add class for custom styling-->
+    <!--                }-->
+    <!--            });-->
+
+    <!--            // Custom CSS to hide months and days in the Datepicker-->
+    <!--            $(".yearpicker .ui-datepicker-month").hide();-->
+    <!--            $(".yearpicker .ui-datepicker-days").hide();-->
+    <!--        });-->
+    <!--    </script>-->
+
+
+
+
+
+    <!--    &lt;!&ndash;    Previous Expereience Button add and remove &ndash;&gt;-->
+    <!--    <script>-->
+
+    <!--        // JavaScript to handle adding/removing educational information rows-->
+    <!--        document.addEventListener("click", function (e) {-->
+    <!--            // Add a new education row-->
+    <!--            if (e.target && e.target.classList.contains("addPreviousExperienceRowButton")) {-->
+    <!--                const container = document.querySelector(".previous-info-row");-->
+    <!--                const newRow = container.cloneNode(true);-->
+
+    <!--                // Clear values in the new row-->
+    <!--                newRow.querySelectorAll("input").forEach(input => input.value = "");-->
+    <!--                newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);-->
+
+    <!--                // Modify buttons in the new row-->
+    <!--                const addButton = newRow.querySelector(".addPreviousExperienceRowButton");-->
+    <!--                addButton.remove(); // Remove "+" button from cloned row-->
+
+    <!--                // Create and add a "-" button to the new row-->
+    <!--                const removeButton = document.createElement("button");-->
+    <!--                removeButton.type = "button";-->
+    <!--                removeButton.classList.add("btn", "btn-danger", "removePreviousExperienceRowButton");-->
+    <!--                removeButton.textContent = "-";-->
+    <!--                newRow.querySelector(".form-group.col-sm-1.d-flex.align-items-end").appendChild(removeButton);-->
+
+    <!--                // Append the cloned row to the parent-->
+    <!--                container.parentNode.appendChild(newRow);-->
+    <!--            }-->
+
+    <!--            // Remove an education row-->
+    <!--            if (e.target && e.target.classList.contains("removePreviousExperienceRowButton")) {-->
+    <!--                const row = e.target.closest(".previous-info-row");-->
+    <!--                if (row && row.parentNode.childElementCount > 1) { // Ensure at least one row remains-->
+    <!--                    row.remove();-->
+    <!--                }-->
+    <!--            }-->
+    <!--        });-->
+
+
+    <!--    </script>-->
+
+    <!--</th:block>-->
+
+    <!--</body>-->
+    <!--</html>--></title>
+</head>
+<body>
+
+</body>
+</html>

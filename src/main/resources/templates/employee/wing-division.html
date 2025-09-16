@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Manage Wings & Divisions</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="main_container">
+        <div class="col-md-12">
+            <div class="right_col" role="main">
+                <div class="col-12">
+                    <div class="x_panel">
+
+                        <div class="x_title ">
+                            <div class="d-flex align-items-center justify-content-between px-0">
+                                <div>
+                                    <h2><b>Wingwise Division</b></h2>
+                                </div>
+                                <div>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success "
+                                       data-toggle="modal" data-target="#wingList" pointer>Wings
+                                        List</a>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success "
+                                       data-toggle="modal" data-target="#addWing" pointer>Add
+                                        Wing</a>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success "
+                                       data-toggle="modal" data-target="#divisionsList" pointer>Divsions
+                                        List</a>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success "
+                                       data-toggle="modal" data-target="#addDivision" pointer>Add
+                                        Divisions</a>
+                                </div>
+                                <div>
+                                    <a style="" type="submit" class="btn btn-outline-success btn-sm text-success "
+                                       data-toggle="modal" data-target="#mapWingToDivision" pointer>Map
+                                        Wing to Division</a>
+                                </div>
+                            </div>
+
+                            <div id="wingDivisionFilter"
+                                 class="d-flex align-items-right justify-content-start px-1 w-25">
+                                <p class="mx-2 font-weight-bold text-md">Filter-</p>
+                                <select class="form-control mx-2 h-25" required id="getWingName">
+                                    <option>Select Wingwise Division</option>
+                                    <option th:each="w : ${wingsName}" th:value="${w}" th:text="${w}"></option>
+                                </select>
+                                <a style="" type="submit" class="btn btn-outline-success btn-sm text-success "
+                                   data-toggle="modal" data-target="#wingWiseDivisionFilter"
+                                   onclick="fetchWingDivisions()" pointer>Filter</a>
+                            </div>
+                        </div>
+
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box table-responsive">
+
+
+                                        <table id="datatable-buttons"
+                                               class="table table-striped table-bordered display"
+                                               style="width:100%"
+                                        >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Wing Name</th>
+                                                <th class="text-center">Division Name</th>
+
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="wingDivision, iterStat : ${wingDivisions}">
+                                                <td th:text="${wingDivision.id}" class="text-center"></td>
+                                                <td th:text="${wingDivision.wing.wingName}" class="text-center"></td>
+                                                <td th:text="${wingDivision.division.divName}"
+                                                    class="text-center"></td>
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1" type="button" data-toggle="modal"
+                                                           th:data-target="'#updateModal'+${iterStat.index}"
+                                                           data-id="${wingDivision.id}"
+                                                          ><i class="fa fa-edit"></i></a>
+                                                        <a class="text-danger mx-2"
+                                                           th:href="@{/admin/deleteWingDivision/{id}(id= ${wingDivision.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this employee?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a type="button" data-toggle="modal"
+                                                           th:data-target="'#detailsForWingDivisions'+${iterStat.index}"><i
+                                                                class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Filter Wing wise Division Modal-->
+                        <div class="modal fade"
+                             id="wingWiseDivisionFilter" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="wingWiseDivisionFilterModal">Wingswise
+                                            Division</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered mt-4">
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th>Wing Name</th>
+                                                <th>Division Name</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="wingWiseDivisionTable">
+                                            <tr>
+                                                <td>a</td>
+                                                <td>b</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Wing List Modal-->
+                        <div class="modal fade"
+                             id="wingList" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="wingListModal">Existing Wings</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered display"
+                                               style="width:100%"
+                                        >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">Wing Name</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="wing, iterStat : ${wings}">
+                                                <td th:text="${wing.wingName}" class="text-center"></td>
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1" type="button"
+                                                           data-toggle="modal"
+                                                           th:data-target="'#updateWing'+${iterStat.index}"><i class="fa fa-edit"></i></a>
+                                                        <a class="text-danger mx-2"
+                                                           th:href="@{/admin/deleteWingById/{id}(id= ${wing.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this Wing?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Add Wing Modal-->
+                        <div class="modal fade"
+                             id="addWing" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="addWingModal">Existing Wings</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/addWing}" th:object="${wing}" method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="wingName" class="form-label">Wing Name:</label>
+                                                <input type="text" th:field="*{wingName}" id="wingName"
+                                                       class="form-control" required
+                                                       placeholder="Please enter your wing name.">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add Wing</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Update Wing Modal-->
+                        <div class="modal fade" th:each="wing, iterStat: ${wings}"
+                             th:id="'updateWing'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="updateWingModal" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="updateWingModal">Update Wing</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/updateWingById/{id}(id = ${wing.id})}"
+                                              method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="updateWingName" class="form-label">Wing Name:</label>
+                                                <input type="text"
+                                                       th:value="${wing.wingName != null ? wing.wingName : 'Default Name'}"
+                                                       name="wingName"
+                                                       id="updateWingName"
+                                                       class="form-control" placeholder="Please enter wing name"
+                                                       required
+                                                       >
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Wing</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Divisions List Modal-->
+                        <div class="modal fade"
+                             id="divisionsList" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="divisionsListModal">Existing
+                                            Divisions</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered display"
+                                               style="width:100%"
+                                        >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">Division Name</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-th-each="division, iterStat : ${divisions}">
+                                                <td th:text="${division.divName}" class="text-center"></td>
+
+
+
+
+
+
+                                                <td class="h3">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <a class="d-flex align-items-center justify-content-center text-success mx-1" type="button"
+                                                           data-toggle="modal"
+                                                           th:data-target="'#updateDivision'+${iterStat.index}"
+                                                        ><i class="fa fa-edit"></i></a>
+
+
+                                                        <a class="text-danger mx-2"
+                                                           th:href="@{/admin/deleteDivisionById/{id}(id= ${division.id})}"
+                                                           onclick="return confirm('Are you sure you want to delete this Wing?')">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Add Divisions Modal-->
+                        <div class="modal fade"
+                             id="addDivision" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="addDivisionModal">Add Division</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/addDivision}" th:object="${division}" method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="divName" class="form-label">Division Name:</label>
+                                                <input type="text" th:field="*{divName}" id="divName"
+                                                       class="form-control"
+                                                       placeholder="Please enter your division name here." required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add Division</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Update Division Modal-->
+                        <div class="modal fade" th:each="division, iterStat: ${divisions}"
+                             th:id="'updateDivision'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="updateDivisionModal" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="updateDivisionModal">Update
+                                            Division</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/updateDivisionById/{id}(id = ${division.id})}"
+                                              method="post"
+                                              class="mb-3">
+                                            <div class="mb-3">
+                                                <label for="wingName" class="form-label">Division Name:</label>
+                                                <input type="text"
+                                                       id="updateDivisionName"
+                                                       th:value="${division.divName != null ? division.divName : 'Default division name'}"
+                                                       name="divName"
+                                                       class="form-control" required
+                                                       placeholder="Please enter your Division name.">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Wing</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Map Wing To Divsion Modal-->
+                        <div class="modal fade"
+                             id="mapWingToDivision" tabindex="-1" role="dialog"
+                             aria-labelledby="mapWingToDivisionModal" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="mapWingToDivisionModal">Map Wing To
+                                            Divsion</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/mapWingDivision}" method="post">
+                                            <div class="mb-3">
+                                                <label for="wingId" class="form-label">Select Wing:</label>
+                                                <select id="wingId" name="wingId" class="form-control" required>
+                                                    <option value="" selected>Select Wing Name</option>
+                                                    <option th:each="w : ${wings}" th:value="${w.id}"
+                                                            th:text="${w.wingName}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="divisionId" class="form-label">Select Division:</label>
+                                                <select id="divisionId" name="divisionId" class="form-control"
+                                                        required onchange="checkDivision(this.id)">
+                                                    <option value="" selected>Select Division Name</option>
+                                                    <option th:each="d : ${divisions}" th:value="${d.id}"
+                                                            th:data-name="${d.divName}"
+                                                            th:text="${d.divName}" ></option>
+                                                </select>
+                                            </div>
+                                            <button id="mapWingDiv" type="submit" class="btn btn-primary">Map Wing to
+                                                Division</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Details Modal -->
+                        <div class="modal fade" data-th-each="wingDivision, iterStat : ${wingDivisions}"
+                             th:id="'detailsForWingDivisions'+${iterStat.index}" tabindex="-1" role="dialog"
+                             aria-labelledby="detailsForWingDivisions" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-size" role="document">
+                                <div class="modal-content modalContent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-black-50" id="detailsForWingDivisions">Wing Division
+                                            Information</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" cursor="pointer">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table
+                                                class="table table-striped table-bordered display"
+                                                style="width:100%"
+                                        >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">Wing</th>
+                                                <th class="text-center">Divisions</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-center">
+                                                <td th:text="${wingDivisions.get(iterStat.index).wing.wingName}"></td>
+                                                <td th:text="${wingDivisions.get(iterStat.index).division.divName}"></td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Update Modal -->
+                        <div class="modal fade" th:each="wingDivision2, index : ${wingDivisions}"
+                             th:id="'updateModal'+${index.index}" tabindex="-1"
+                             role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Update Wing Division</h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/updateWingDivision/{id}(id= ${wingDivision2.id})}"
+                                              method="post"
+                                              class="mb-3" >
+                                            <div class="mb-3">
+
+                                                <label for="getWingNameOfWingWiseDivision" class="form-label">Wing Name:</label>
+                                                <select class="form-control mx-2 h-25" required
+                                                        id="getWingNameOfWingWiseDivision" name="wingName">
+                                                    <option value="">Select Wing</option>
+                                                    <option th:each="w : ${wingsName}" th:value="${w}" th:text="${w}"
+                                                    th:selected="${wingDivision2.wing.wingName == w}"
+                                                    th:name="${wingDivision2.wing.wingName}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+
+                                                <label for="getDivNameOfWingWiseDivision" class="form-label">Division
+                                                    Name:</label>
+                                                <select class="form-control mx-2 h-25" required
+                                                        id="getDivNameOfWingWiseDivision"
+                                                        name="divisionName"
+                                                        >
+                                                    <option value="">Select Division</option>
+                                                    <option th:each="w : ${divisions}" th:value="${w.divName}"
+                                                            th:text="${w.divName}"
+                                                            th:selected="${wingDivision2.division.divName == w.divName}"
+                                                            th:name="${wingDivision2.division.divName}"
+                                                    ></option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Update Wing Wise
+                                                Division</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script>
+        console.log('Wing-Division Page');
+
+        // //Fetch Wing Divisions
+        function fetchWingDivisions() {
+            let wingName = document.getElementById("getWingName").value;
+
+            if (!wingName) {
+                alert("Please enter a wing name");
+                return;
+            }
+
+            fetch(`http://localhost:8086/admin/findDivisionByWingNameFromWingDivision/${wingName}`)
+                .then(response => response.json())
+                .then(data => {
+                    let tableBody = document.getElementById("wingWiseDivisionTable");
+                    tableBody.innerHTML = ""; // Clear existing rows
+
+                    if (data.length === 0) {
+                        tableBody.innerHTML = "<tr><td colspan='2' class='text-center'>No data found</td></tr>";
+                    } else {
+                        data.forEach(item => {
+                            console.log(item.wing.wingName);
+                            console.log(item.division.divName);
+
+                            let row = `<tr>
+                                <td>${item.wing.wingName}</td>
+                                <td>${item.division.divName}</td>
+                            </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                    }
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        }
+
+        // //Fetch Update Wing Divisions
+        // function fetchUpdateWingDivisions(tag) {
+        //     let selectedWingDivisionId = tag.getAttribute("data-id");
+        //     debugger
+        //     fetch(`http://localhost:8086/admin/updateWingDIvision/${selectedWingDivisionId}`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             debugger
+        //             let wingName = document.getElementById("wingNameById");
+        //             let divisionName = document.getElementById("divisionNameById");
+        //
+        //             if (data.length === 0) {
+        //                 wingName.innerText = "No data found";
+        //                 divisionName.innerText = "No data found";
+        //
+        //             } else {
+        //                 data.forEach(item => {
+        //                     console.log(item.wing.wingName);
+        //                     console.log(item.division.divName);
+        //
+        //                     wingName.innerText = `${item.wing.wingName}`;
+        //                     divisionName.innerText = `${item.division.divName}`;
+        //                 });
+        //             }
+        //         })
+        //         .catch(error => console.error("Error fetching data:", error));
+        // }
+        //
+        // //Fetch update
+        //
+        // let selectedWingDivisionId = null;
+        //
+        // //Fetch WingDivision by ID and populate the modal
+        // function fetchWingDivisionById(button) {
+        //     debugger
+        //     selectedWingDivisionId = button.getAttribute("data-id");
+        //
+        //     fetch(`http://localhost:8086/admin/updateWingDIvision/${selectedWingDivisionId}`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             debugger
+        //             document.getElementById("wingDivisionId").value = data.id;
+        //             document.getElementById("wingSelect").value = data.wingName;
+        //             document.getElementById("divisionSelect").value = data.divisionName;
+        //         })
+        //         .catch(error => console.error("Error fetching data:", error));
+        // }
+        //
+        // //Update WingDivision via API
+        // function updateWingDivision() {
+        //     let updatedWingName = document.getElementById("wingSelect").value;
+        //     let updatedDivision = document.getElementById("divisionSelect").value;
+        //
+        //     fetch(`http://localhost:8086/admin/updateWingDIvision/${selectedWingDivisionId}`, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //             wingName: updatedWingName,
+        //             divisionName: updatedDivision
+        //         })
+        //     })
+        //         .then(response => {
+        //             debugger
+        //             if (response.ok) {
+        //                 alert("WingDivision updated successfully!");
+        //                 location.reload(); // Refresh to show updated data
+        //             } else {
+        //                 alert("Error updating WingDivision");
+        //             }
+        //         })
+        //         .catch(error => console.error("Error updating:", error));
+        // }
+
+
+
+
+        //24-03-2025
+
+        function checkDivision(id){
+
+            const wing = document.querySelector('#wingId');
+            const selectedWing = wing.options[wing.selectedIndex];
+
+            const division = document.getElementById(id);
+            const selectDiv = division.options[division.selectedIndex];
+
+            console.log(selectedWing.innerText);
+            console.log(selectDiv.innerText);
+
+            fetch(`http://localhost:8086/admin/findDivisionByWingNameFromWingDivision/${selectedWing.innerText.trim()}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        if(item.division.divName === selectDiv.innerText.trim()){
+                            console.log(item.division.divName, selectDiv.innerText);
+                            const error = `<span style="color:red;">Division is available.</span>`;
+                            if(!(document.getElementById(id).nextElementSibling)){
+                                document.getElementById(id).insertAdjacentHTML('afterend', error);
+                            }
+                            document.getElementById('mapWingDiv').disabled = true;
+                        } else {
+                            if(document.getElementById(id).nextElementSibling){
+                                document.getElementById(id).nextElementSibling.remove();
+                                document.getElementById('mapWingDiv').disabled = false;
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        }
+
+        //24-03-2025
+
+    </script>
+</th:block>
+</body>
+</html>

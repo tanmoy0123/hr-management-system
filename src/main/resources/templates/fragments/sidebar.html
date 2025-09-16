@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="sidebar" class="col-md-3 left_col menu_fixed">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title"> <!__ removed the style file 01/28/2025 __>
+
+            <a href="#" th:href="@{/}" class="site_title"> <!__ removed the style file 01/28/2025 __>
+                <img src="/images/logo.PNG" class="img-circle profile_img" alt="">
+                <span>HRM-EMPLOYEE</span>
+            </a>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <br/>
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <ul class="nav side-menu">
+                    <!-- Dashboard & Common Settings menu -->
+                    <li><a href="#" th:href="@{/}"><i class="fa fa-tachometer"></i>Dashboard</a></li>
+                    <!-- 01/29/2025 -->
+
+
+                    <li class="side_menu_item" > <!-- 01/29/2025 -->
+                        <a class="common-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-gears"></i> Common Settings</span> <span
+                                    class="fa fa-chevron-down"></span>
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <!--set role management 12-02-2025-->
+                            <li><a href="#" th:href="@{/employee/}"> Role Management</a></li>
+                            <!--set Organization management 12-02-2025-->
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/employee/}"> Organization Management</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <!-- <li><a href="#" th:href="@{/employee/database}"> Employee Database</a></li> &lt;!&ndash; removed icon 01/30/2025 &ndash;&gt;-->
+                            <!-- <li><a href="#" th:href="@{/employee}"> Generate Id Card</a></li> &lt;!&ndash; removed icon 01/30/2025 &ndash;&gt;-->
+                            <li><a href="#" th:href="@{/admin/manage}">Wing and Division</a></li> <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/admin/manage-zone-wise-branch}">Zone and Branch</a></li>
+                            <!--removed icon  01/30/2025 -->
+                        </ul>
+                    </li>
+
+
+                    <!-- 11-02-2025 -->
+                    <!-- Employee Setup Menu -->
+                    <li class="side_menu_item" > <!-- 01/29/2025 -->
+                        <a class="employee-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-edit"></i> Employee Set-Up </span> <span
+                                    class="fa fa-chevron-down"></span>
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <li><a href="#" th:href="@{/employee/create}" > Create Employee-Manual</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/employee/create}"> Create Employee-Career</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/employee}"> Employee Database</a></li>
+
+                            <li><a href="#" th:href="@{/place-of-posting/manage}"> Place of Posting</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/employee}"> Generate Id Card</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                        </ul>
+                    </li>
+
+                    <!--sec:authorize="hasRole('USER')"-->
+                    <!-- Attendance Management Menu -->
+                    <li class="side_menu_item"> <!-- 01/29/2025 -->
+                        <a class="attendance-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-calendar-check-o"></i> Attendance </span> <span
+                                    class="fa fa-chevron-down"></span> <!-- 01/30/2025 -->
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <li><a href="#" th:href="@{/attendance/report}"> View Attendance Report</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/attendance/mark}"> Mark Attendance</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/attendance/settings}"> Attendance Settings</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                        </ul>
+                    </li>
+                    <!-- 11-02-2025 -->
+
+                    <!-- Employee Setup Menu -->
+                    <!-- Payroll Management Menu -->
+                    <li class="side_menu_item"> <!-- 01/29/2025 -->
+                        <a class="payroll-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-money"></i> Payroll Management </span> <span
+                                    class="fa fa-chevron-down"></span>
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <li><a href="#" th:href="@{/payroll/salary-structure}"> Salary Structure</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/payroll/generate}"> Generate Payroll</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/payroll/bonus}"> Bonuses</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                        </ul>
+                    </li>
+
+                    <!-- Leave Management Menu -->
+                    <li class="side_menu_item"> <!-- 01/29/2025 -->
+                        <a class="leave-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-plane"></i> Leave Management </span> <span
+                                    class="fa fa-chevron-down"></span>
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <li><a href="#" th:href="@{/leave/apply}"> Apply Leave</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/leave/history}"> Leave History</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/leave/approval}"> Approve Leaves</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                        </ul>
+                    </li>
+
+                    <!-- Performance Management Menu -->
+                    <li class="side_menu_item"> <!-- 01/29/2025 -->
+                        <a class="perfomance-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-line-chart"></i> Performance </span> <span
+                                    class="fa fa-chevron-down"></span> <!-- 01/30/2025 -->
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <li><a href="#" th:href="@{/performance/review}"> Performance Reviews</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/performance/goals}"> Set Goals</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                        </ul>
+                    </li>
+
+                    <!-- Reports Menu -->
+                    <li class="side_menu_item"> <!-- 01/29/2025 -->
+                        <a class="report-link"> <!-- class added 01/30/2025 -->
+                            <span class="left"><i class="fa fa-file"></i> Reports </span> <span
+                                    class="fa fa-chevron-down"></span>
+                        </a> <!-- 01/29/2025 -->
+                        <ul class="nav child_menu">
+                            <li><a href="#" th:href="@{/reports/employee}"> Employee Reports</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/reports/payroll}"> Payroll Reports</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                            <li><a href="#" th:href="@{/reports/attendance}"> Attendance Reports</a></li>
+                            <!-- removed icon 01/30/2025 -->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /sidebar menu -->
+    </div>
+</div>
+</body>
+</html>
