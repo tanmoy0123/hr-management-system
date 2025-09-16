@@ -22,17 +22,4 @@ A **Human Resource Management System (HRMS)** built to streamline and automate H
 - **Database**: PostgreSQL / MySQL  
 - **Build Tools**: Maven / Gradle / npm  
 
----
-
-## 📸 Screenshots
-
-### Dashboard  
-![Dashboard Screenshot](screenshots/screenshot1.png)
-
-### Employee Management  
-![Employee Management Screenshot](screenshots/screenshot2.png)
-
-### Payroll Module  
-![Payroll Screenshot](screenshots/screenshot3.png)
-
----
+--
