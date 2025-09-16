@@ -17,9 +17,8 @@ A **Human Resource Management System (HRMS)** built to streamline and automate H
 
 ## 🚀 Tech Stack
 
-- **Backend**: Spring Boot / Django (based on implementation)  
-- **Frontend**: React / HTML / CSS / JavaScript  
-- **Database**: PostgreSQL / MySQL  
-- **Build Tools**: Maven / Gradle / npm  
+- **Backend**: Spring Boot 
+- **Frontend**: Thymleaf / HTML / CSS / JavaScript  
+- **Database**: PostgreSQL
+- **Build Tools**: Maven / npm  
 
---
